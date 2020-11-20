@@ -1,0 +1,14 @@
+# data directories 
+data/backup-web/*
+data/data-mysql/*
+data/data-nextcloud/*
+data/data-wordpress/*
+data/data-tmp/*
+!data/backup-web/.placeholder
+!data/data-mysql/.placeholder
+!data/data-nextcloud/.placeholder
+!data/data-wordpress/.placeholder
+!data/data-tmp/.placeholder
+
+*.vars
+!example.vars

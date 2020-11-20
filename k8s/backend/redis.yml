@@ -1,0 +1,34 @@
+# TODO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-server
+  namespace: ck8s
+  labels:
+    role: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: redis
+      tier: backend
+  template:
+    metadata:
+      labels:
+        role: redis
+        tier: backend
+    spec:
+      containers:
+      - name: redis-server
+        image: redis:alpine
+        imagePullPolicy: IfNotPresent        
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "200m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        
