@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+        name: ns-common-resources
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+        name: ns-frontend
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+        name: ns-backend
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+        name: ns-tools
