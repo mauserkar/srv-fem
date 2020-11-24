@@ -5,6 +5,7 @@ items:
     kind: PersistentVolume
     metadata:
       name: pv-wordpress
+      namespace: ns-common-resources
       labels:
         type: local
     spec:
@@ -20,6 +21,7 @@ items:
     kind: PersistentVolume
     metadata:
       name: pv-mysql
+      namespace: ns-common-resources
       labels:
         type: local
     spec:
@@ -36,6 +38,7 @@ items:
     kind: PersistentVolume
     metadata:
       name: pv-nextcloud
+      namespace: ns-common-resources
       labels:
         type: local
     spec:
