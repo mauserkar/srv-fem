@@ -29,7 +29,7 @@ items:
       accessModes:
         - ReadWriteOnce
       hostPath:
-        path: "$ENV_REPO_PATH/data/data-wordpress"
+        path: "$ENV_REPO_PATH/data/data-mysql"
     #  persistentVolumeReclaimPolicy: Retain
 
   - apiVersion: v1
@@ -46,5 +46,5 @@ items:
         - ReadWriteOnce
       hostPath:
         # REPO_PATH
-        path: "$ENV_REPO_PATH/data/data-wordpress"
+        path: "$ENV_REPO_PATH/data/data-nextcloud"
     #  persistentVolumeReclaimPolicy: Retain

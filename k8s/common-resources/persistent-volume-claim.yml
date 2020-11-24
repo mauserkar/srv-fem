@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: pv-claim-wordpress
+      labels:
+        app: wordpress
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: pv-claim-mysql
+      labels:
+        app: mysql
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi   
+
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: pv-claim-nextcloud
+      labels:
+        app: nextcloud
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi

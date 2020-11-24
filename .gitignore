@@ -9,6 +9,4 @@ data/data-tmp/*
 !data/data-nextcloud/.placeholder
 !data/data-wordpress/.placeholder
 !data/data-tmp/.placeholder
-
-*.vars
-!example.vars
+files/secrets.sh
