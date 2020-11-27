@@ -1,14 +1,18 @@
 # data directories 
 data/backup-web/*
+data/backup-wordpress/*
 data/data-mysql/*
 data/data-nextcloud/*
 data/data-wordpress/wp-dev/*
 data/data-wordpress/wp-prd/*
 data/data-tmp/*
 !data/backup-web/.placeholder
+!data/backup-wordpress/.placeholder
 !data/data-mysql/.placeholder
 !data/data-nextcloud/.placeholder
 !data/data-wordpress/wp-dev/.placeholder
 !data/data-wordpress/wp-prd/.placeholder
 !data/data-tmp/.placeholder
+# Remplace Vars
+*-secrets-*
 files/secrets.sh

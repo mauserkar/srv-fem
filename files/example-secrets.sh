@@ -27,5 +27,16 @@ env | grep "ENV_"
 # View Alias
 alias
 
-# Usage:
+# Remplace files
+env_vars_files() {
+    grep "ENV_" $ENV_REPO_PATH . -R | while read file; do env_vars() $file; done
+}
+env_vars() {
+    FILE=$1
+    WITHOUT_EXT_FILE=$(echo $FILE | cut -f1 -d ".")
+    EXT_FILE=$(echo $FILE | cut -f2 -d ".")
+    envsubst < $path > "$WITHOUT_EXT_FILE-secrets-.$EXT_FILE"
+}
+
+# Usage
 echo "usage: envsubst < file_with_env_vars.yml | command -"
