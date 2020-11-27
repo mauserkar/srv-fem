@@ -1,0 +1,56 @@
+version: "3.2"
+
+services:
+  proxy:
+    labels:
+      - module_name=proxy
+      - module_type=nginx
+    image: jwilder/nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - $ENV_REPO_PATH/swarm/nginx:/etc/nginx/vhost.d:ro
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    networks:
+      common-network:
+        aliases:
+          - proxy
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=$ENV_MYSQL_PASSWORD
+    volumes:
+      - $ENV_REPO_PATH/data/data-mysql:/var/lib/mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+    # ports:
+    #   - 3306:3306
+    networks:
+      common-network:
+        aliases:
+          - mysql
+
+networks:
+  common-network:
+    external: true
+
+# docker network create common-network -d overlay --subnet 10.0.0.0/16 --attachable
+# docker stack deploy -c $ENV_REPO_PATH/swarm/common-stack.yml common-stack

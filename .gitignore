@@ -2,11 +2,13 @@
 data/backup-web/*
 data/data-mysql/*
 data/data-nextcloud/*
-data/data-wordpress/*
+data/data-wordpress/wp-dev/*
+data/data-wordpress/wp-prd/*
 data/data-tmp/*
 !data/backup-web/.placeholder
 !data/data-mysql/.placeholder
 !data/data-nextcloud/.placeholder
-!data/data-wordpress/.placeholder
+!data/data-wordpress/wp-dev/.placeholder
+!data/data-wordpress/wp-prd/.placeholder
 !data/data-tmp/.placeholder
 files/secrets.sh

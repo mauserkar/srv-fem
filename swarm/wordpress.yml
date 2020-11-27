@@ -1,0 +1,73 @@
+version: '3.3'
+services:
+  fem-dev:
+    environment:
+      - VIRTUAL_HOST=dev.femweddings.com,www.dev.femweddings.com
+      - HTTPS_METHOD=noredirect
+      - WORDPRESS_DB_HOST=$ENV_MYSQL_DB_SERVER
+      - WORDPRESS_DB_NAME=$ENV_MYSQL_DB_DEV
+      - WORDPRESS_DB_USER=$ENV_MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$ENV_MYSQL_PASSWORD
+    image: wordpress:latest
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - $ENV_REPO_PATH/data/data-wordpress/wp-dev:/var/www/html
+    networks:
+      - common-network
+
+  fem-prd:
+    environment:
+      - VIRTUAL_HOST=femweddings.com,www.femweddings.com
+      - HTTPS_METHOD=noredirect
+      - WORDPRESS_DB_HOST=$ENV_MYSQL_DB_SERVER
+      - WORDPRESS_DB_NAME=$ENV_MYSQL_DB_PRD
+      - WORDPRESS_DB_USER=$ENV_MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$ENV_MYSQL_PASSWORD
+    image: wordpress:latest
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - $ENV_REPO_PATH/data/data-wordpress/wp-prd:/var/www/html
+    networks:
+      - common-network
+
+  # backup-dbs:
+  #   environment:
+  #     - BAK_RETENTION=7
+  #     - MYSQL_SERVER=$ENV_MYSQL_DB_SERVER
+  #     - MYSQL_DATABASES="$ENV_MYSQL_DB_DEV $ENV_MYSQL_DB_PRD"
+  #     - MYSQL_USER=$ENV_MYSQL_USER
+  #     - MYSQL_PASSWORD=$ENV_MYSQL_PASSWORD
+  #     - CRON_SCHEDULE="0 */6 * * *"
+  #   image: carlosgaro/mysql-backup
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "100m"
+  #       max-file: "10"
+  #   deploy:
+  #     restart_policy:
+  #       condition: on-failure
+  #   volumes:
+  #     - $ENV_REPO_PATH/data/backup-mysql:/app/backup 
+  #   networks:
+  #     - common-network
+
+networks:
+  common-network:
+    external: true
+
+# docker stack deploy -c $ENV_REPO_PATH/swarm/wordpress.yml wordpress
