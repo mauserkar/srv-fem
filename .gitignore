@@ -1,12 +1,12 @@
 # data directories 
-data/backup-web/*
+data/backup-mysql/*
 data/backup-wordpress/*
 data/data-mysql/*
 data/data-nextcloud/*
 data/data-wordpress/wp-dev/*
 data/data-wordpress/wp-prd/*
 data/data-tmp/*
-!data/backup-web/.placeholder
+!data/backup-mysql/.placeholder
 !data/backup-wordpress/.placeholder
 !data/data-mysql/.placeholder
 !data/data-nextcloud/.placeholder
