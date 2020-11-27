@@ -4,10 +4,10 @@ services:
     environment:
       - VIRTUAL_HOST=dev.femweddings.com,www.dev.femweddings.com
       - HTTPS_METHOD=noredirect
-      - WORDPRESS_DB_HOST=$ENV_MYSQL_DB_SERVER
-      - WORDPRESS_DB_NAME=$ENV_MYSQL_DB_DEV
-      - WORDPRESS_DB_USER=$ENV_MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$ENV_MYSQL_PASSWORD
+      - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
+      - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_DEV
+      - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
+      - WORDPRESS_DB_PASSWORD=ENV_WORDPRESS_PASSWORD
     image: wordpress:latest
     logging:
       driver: "json-file"
@@ -26,10 +26,10 @@ services:
     environment:
       - VIRTUAL_HOST=femweddings.com,www.femweddings.com
       - HTTPS_METHOD=noredirect
-      - WORDPRESS_DB_HOST=$ENV_MYSQL_DB_SERVER
-      - WORDPRESS_DB_NAME=$ENV_MYSQL_DB_PRD
-      - WORDPRESS_DB_USER=$ENV_MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$ENV_MYSQL_PASSWORD
+      - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
+      - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_PRD
+      - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
+      - WORDPRESS_DB_PASSWORD=ENV_WORDPRESS_PASSWORD
     image: wordpress:latest
     logging:
       driver: "json-file"
