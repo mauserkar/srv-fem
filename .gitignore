@@ -14,5 +14,5 @@ data/data-tmp/*
 !data/data-wordpress/wp-prd/.placeholder
 !data/data-tmp/.placeholder
 # Remplace Vars
+!files/example-env-vars-secrets.sh
 *-env-vars-secrets*
-files/secrets.sh
