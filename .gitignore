@@ -6,6 +6,7 @@ data/data-nextcloud/*
 data/data-wordpress/wp-dev/*
 data/data-wordpress/wp-prd/*
 data/data-tmp/*
+data/data-certificates/*
 !data/backup-mysql/.placeholder
 !data/backup-wordpress/.placeholder
 !data/data-mysql/.placeholder
@@ -13,4 +14,5 @@ data/data-tmp/*
 !data/data-wordpress/wp-dev/.placeholder
 !data/data-wordpress/wp-prd/.placeholder
 !data/data-tmp/.placeholder
+!data/data-certificates/.placeholder
 *-env-vars-secrets*

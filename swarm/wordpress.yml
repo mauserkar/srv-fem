@@ -2,7 +2,7 @@ version: '3.3'
 services:
   fem-dev:
     environment:
-      - VIRTUAL_HOST=dev.femweddings.com,www.dev.femweddings.com
+      - VIRTUAL_HOST=dev.,www.dev.
       - HTTPS_METHOD=noredirect
       - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
       - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_DEV
@@ -26,7 +26,7 @@ services:
 
   fem-prd:
     environment:
-      - VIRTUAL_HOST=femweddings.com,www.femweddings.com
+      - VIRTUAL_HOST=,www.
       - HTTPS_METHOD=noredirect
       - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
       - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_PRD
