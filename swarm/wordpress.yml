@@ -2,8 +2,8 @@ version: '3.3'
 services:
   fem-dev:
     environment:
-      - VIRTUAL_HOST=dev.,www.dev.
-      - HTTPS_METHOD=noredirect
+      - VIRTUAL_HOST=dev.$ENV_DOMAIN,www.dev.$ENV_DOMAIN
+      - HTTPS_METHOD=redirect
       - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
       - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_DEV
       - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
@@ -26,8 +26,8 @@ services:
 
   fem-prd:
     environment:
-      - VIRTUAL_HOST=,www.
-      - HTTPS_METHOD=noredirect
+      - VIRTUAL_HOST=$ENV_DOMAIN,www.$ENV_DOMAIN
+      - HTTPS_METHOD=redirect
       - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
       - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_PRD
       - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
@@ -52,7 +52,7 @@ services:
     environment:
       - BAK_RETENTION=7
       - MYSQL_SERVER=$ENV_MYSQL_SERVER
-      - MYSQL_DATABASES="$ENV_WORDPRESS_DB_DEV $ENV_WORDPRESS_DB_PRD"
+      - MYSQL_DATABASES="$ENV_WORDPRESS_DB_PRD"
       - MYSQL_USER=$ENV_MYSQL_USER
       - MYSQL_PASSWORD=$ENV_MYSQL_PASSWORD
       - CRON_SCHEDULE="0 */6 * * *"
