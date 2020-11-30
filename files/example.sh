@@ -31,11 +31,6 @@ alias env_find_vars_files='find $ENV_REPO_PATH -name "*-env-vars-secrets*"'
 echo "--- Variables ---"
 env | grep --color=never "ENV_" | sort
 
-# View Alias
-echo "--- Alias ---"
-alias | grep --color=never "env_" | awk '{ $1 = "" ; print }' | column -t | sort
-echo "env_vars_file_remplace"
-
 # Load Vars on Login
 CHECK_ALIAS=$(grep "$ENV_REPO_PATH/$ENV_SECRETS_FILE" /home/$ENV_USER/.bashrc)
 if [ -z "$CHECK_ALIAS" ] ; then
@@ -43,18 +38,18 @@ if [ -z "$CHECK_ALIAS" ] ; then
 fi
 
 # Remplace files
-env_vars_file_remplace() {
-    FILES_WITH_SECRETS=$(grep -sl "ENV_" $ENV_REPO_PATH -R | grep -v "env-vars-secrets" | grep -v "$ENV_SECRETS_FILE" | grep -v "example.sh" )
-    for file in $FILES_WITH_SECRETS ; do
-       env_vars_file $file
-    done
-}
-
 env_vars_file() {
     FILE=$1
     EXT_REMOVE=$(echo $FILE | cut -f1 -d ".")
     EXT_FILE=$(echo $FILE | cut -f2 -d ".")
     envsubst < $FILE > "$EXT_REMOVE-env-vars-secrets.$EXT_FILE"
+}
+
+env_vars_file_remplace() {
+    FILES_WITH_SECRETS=$(grep -sl "ENV_" $ENV_REPO_PATH -R | grep -v "env-vars-secrets" | grep -v "$ENV_SECRETS_FILE" | grep -v "example.sh" )
+    for file in $FILES_WITH_SECRETS ; do
+       env_vars_file $file
+    done
 }
 
 env_vars_file_remplace

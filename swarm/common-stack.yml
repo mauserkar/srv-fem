@@ -8,7 +8,7 @@ services:
     image: jwilder/nginx-proxy
     volumes:
       - $ENV_REPO_PATH/data/data-certificates/certs/live/$ENV_DOMAIN/fullchain.pem:/etc/nginx/certs/$ENV_DOMAIN.crt
-      - $ENV_REPO_PATH/data/data-certificates/certslive/$ENV_DOMAIN/privkey.pem:/etc/nginx/certs/$ENV_DOMAIN.key
+      - $ENV_REPO_PATH/data/data-certificates/certs/live/$ENV_DOMAIN/privkey.pem:/etc/nginx/certs/$ENV_DOMAIN.key
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - $ENV_REPO_PATH/swarm/nginx:/etc/nginx/vhost.d:ro
     ports:
@@ -49,6 +49,16 @@ services:
       common-network:
         aliases:
           - mysql
+
+  redis:
+    image: "redis:alpine"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      common-network:
+        aliases:
+          - redis
 
 networks:
   common-network:

@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  nextcloud:
+    environment:
+      - VIRTUAL_HOST=cloud.$ENV_DOMAIN
+      - HTTPS_METHOD=redirect
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=$ENV_NEXTCLOUD_DB
+      - MYSQL_USER=$ENV_NEXTCLOUD_USER
+      - MYSQL_PASSWORD=$ENV_NEXTCLOUD_PASSWORD
+      - REDIS_HOST=redis
+      - REDIS_HOST_PORT=6379
+    image: nextcloud
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - $ENV_REPO_PATH/data/data-nextcloud:/var/www/html
+    networks:
+      - common-network
+
+networks:
+  common-network:
+    external: true
+
+# docker stack deploy -c $ENV_REPO_PATH/swarm/nextcloud.yml nexcloud
