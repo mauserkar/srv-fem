@@ -1,28 +1,28 @@
 version: '3.3'
 services:
-  # fem-dev:
-  #   environment:
-  #     - VIRTUAL_HOST=dev.$ENV_DOMAIN,www.dev.$ENV_DOMAIN
-  #     - HTTPS_METHOD=redirect
-  #     - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
-  #     - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_DEV
-  #     - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
-  #     - WORDPRESS_DB_PASSWORD=$ENV_WORDPRESS_PASSWORD
-  #     - APACHE_RUN_USER=$ENV_USER
-  #   command: bash -c "/usr/sbin/useradd $ENV_USER && /usr/sbin/usermod -a -G www-data $ENV_USER && apache2-foreground"
-  #   image: wordpress:latest
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "100m"
-  #       max-file: "10"
-  #   deploy:
-  #     restart_policy:
-  #       condition: on-failure
-  #   volumes:
-  #     - $ENV_REPO_PATH/data/data-wordpress/wp-dev:/var/www/html
-  #   networks:
-  #     - common-network
+  fem-imp:
+    environment:
+      - VIRTUAL_HOST=$ENV_DOMAIN_FEM,www.$ENV_DOMAIN_FEM
+      - HTTPS_METHOD=noredirect
+      - WORDPRESS_DB_HOST=$ENV_MYSQL_SERVER
+      - WORDPRESS_DB_NAME=$ENV_WORDPRESS_DB_FEM
+      - WORDPRESS_DB_USER=$ENV_WORDPRESS_USER
+      - WORDPRESS_DB_PASSWORD=$ENV_WORDPRESS_PASSWORD
+      - APACHE_RUN_USER=$ENV_USER
+    command: bash -c "/usr/sbin/useradd $ENV_USER && /usr/sbin/usermod -a -G www-data $ENV_USER && apache2-foreground"
+    image: wordpress:6.2.0-php8.2-apache
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - $ENV_REPO_PATH/data/data-wordpress/wp-fem-imp:/var/www/html
+    networks:
+      - common-network
 
   fem-prd:
     environment:
@@ -34,7 +34,7 @@ services:
       - WORDPRESS_DB_PASSWORD=$ENV_WORDPRESS_PASSWORD
       - APACHE_RUN_USER=$ENV_USER
     command: bash -c "/usr/sbin/useradd $ENV_USER && /usr/sbin/usermod -a -G www-data $ENV_USER && apache2-foreground"
-    image: wordpress:latest
+    image: wordpress@sha256:c2530791f3560447674e76db3b0c03ff591d81a8ae0e30c5be656e262b1a0ea9
     logging:
       driver: "json-file"
       options:
@@ -52,7 +52,7 @@ services:
     environment:
       - BAK_RETENTION=7
       - MYSQL_SERVER=$ENV_MYSQL_SERVER
-      - MYSQL_DATABASES="$ENV_WORDPRESS_DB_PRD"
+      - MYSQL_DATABASES="$ENV_WORDPRESS_DB_PRD,$ENV_WORDPRESS_DB_FEM"
       - MYSQL_USER=$ENV_MYSQL_USER
       - MYSQL_PASSWORD=$ENV_MYSQL_PASSWORD
       - CRON_SCHEDULE="0 6 * * *"
