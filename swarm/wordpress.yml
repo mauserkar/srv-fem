@@ -10,7 +10,7 @@ services:
       - WORDPRESS_DB_PASSWORD=$ENV_WORDPRESS_PASSWORD
       - APACHE_RUN_USER=$ENV_USER
     command: bash -c "/usr/sbin/useradd $ENV_USER && /usr/sbin/usermod -a -G www-data $ENV_USER && apache2-foreground"
-    image: wordpress:6.2.0-php8.2-apache
+    image: wordpress:6.1.0-php8.2-apache
     logging:
       driver: "json-file"
       options:
